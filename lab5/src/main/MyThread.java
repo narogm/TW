@@ -1,6 +1,8 @@
 package main;
 
-public class MyThread implements Runnable {
+import java.util.concurrent.Callable;
+
+public class MyThread implements Callable {
 
     private Mandelbrot mandelbrot;
     private int threadID;
@@ -11,8 +13,10 @@ public class MyThread implements Runnable {
     }
 
     @Override
-    public void run() {
-//        if(threadID == 5)
+    public Object call() {
+        long tmp = System.nanoTime();
         mandelbrot.calculate(threadID);
+        tmp = System.nanoTime() - tmp;
+        return tmp;
     }
 }
