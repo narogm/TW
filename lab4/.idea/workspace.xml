@@ -6,6 +6,7 @@
       <change beforePath="$PROJECT_DIR$/out/production/lab5/main/Mandelbrot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab5/main/Mandelbrot.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lab5/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab5/src/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lab5/src/main/Mandelbrot.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab5/src/main/Mandelbrot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab5/src/main/MyThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab5/src/main/MyThread.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +89,7 @@
       <workItem from="1572253721134" duration="3547000" />
       <workItem from="1572689870365" duration="110000" />
       <workItem from="1572690053141" duration="21830000" />
-      <workItem from="1573669083645" duration="13508000" />
+      <workItem from="1573669083645" duration="14329000" />
     </task>
     <servers />
   </component>

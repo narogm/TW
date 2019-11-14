@@ -14,9 +14,9 @@ public class MyThread implements Callable {
 
     @Override
     public Object call() {
-        long tmp = System.nanoTime();
+//        long tmp = System.nanoTime();
         mandelbrot.calculate(threadID);
-        tmp = System.nanoTime() - tmp;
-        return tmp;
+//        tmp = System.nanoTime() - tmp;
+        return 0;
     }
 }
