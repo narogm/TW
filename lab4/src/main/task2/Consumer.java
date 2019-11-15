@@ -15,11 +15,18 @@ public class Consumer extends Person implements Callable {
 
     @Override
     public Object call() {
-        for(int i=0; i<Integer.MAX_VALUE; i++){
+        int i=0;
+        while(!Thread.currentThread().isInterrupted()){
             int val = generator.nextInt(M) + 1;
-            waitingTimeAverage = (waitingTimeAverage*i + buffer.get(val))/(i+1);
+            long tmp = buffer.get(val);
+            if(tmp != 0)
+                times.put(val, tmp);
+//                waitingTimeAverage = (waitingTimeAverage*i + tmp)/(i+1);
+            else
+                break;
+            i++;
         }
-        System.out.println("\n--------- consumer has finished --> " + waitingTimeAverage + " ------------\n");
+//        System.out.println("\n--------- consumer has finished --> " + waitingTimeAverage + " ------------\n");
         return this;
     }
 }

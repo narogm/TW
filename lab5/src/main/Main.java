@@ -57,6 +57,6 @@ public class Main {
             e.printStackTrace();
 
         }
-        mandelbrot.setVisible(true);
+//        mandelbrot.setVisible(true);
     }
 }

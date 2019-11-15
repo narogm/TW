@@ -26,21 +26,21 @@ public class Buffer {
         try {
             long startTime = System.nanoTime();
             while(productSize + currentlyTaken > maxSize) {
-                System.out.println("producer has to wait | val --> " + productSize);
+//                System.out.println("producer has to wait | val --> " + productSize);
                 producersCondition.await();
-//                consumersCondition.signal();
             }
             long waitingTime = System.nanoTime() - startTime;
             currentlyTaken += productSize;
-            System.out.println("Producer has add to buffer val: " + productSize + "\ncurrently taken ---> " + currentlyTaken);
+//            System.out.println("Producer has add to buffer val: " + productSize + "\ncurrently taken ---> " + currentlyTaken);
             consumersCondition.signal();
             return waitingTime;
         } catch (InterruptedException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+//            System.out.println("producer -- interrupt");
+            return 0;
         } finally {
             lock.unlock();
         }
-        return 0;
     }
 
     public long get(int productSize){
@@ -48,21 +48,21 @@ public class Buffer {
         try {
             long startTime = System.nanoTime();
             while(currentlyTaken < productSize) {
-                System.out.println("consumer has to wait | val --> " + productSize);
+//                System.out.println("consumer has to wait | val --> " + productSize);
                 consumersCondition.await();
-//                producersCondition.signal();
             }
             long waitingTime = System.nanoTime() - startTime;
             currentlyTaken -= productSize;
-            System.out.println("Consumer has taken from buffer val: " + productSize + "\ncurrently taken ---> " + currentlyTaken);
+//            System.out.println("Consumer has taken from buffer val: " + productSize + "\ncurrently taken ---> " + currentlyTaken);
             producersCondition.signal();
             return waitingTime;
         } catch (InterruptedException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+//            System.out.println("consumer -- interrupt");
+            return 0;
         } finally {
             lock.unlock();
         }
-        return 0;
     }
 
 }
