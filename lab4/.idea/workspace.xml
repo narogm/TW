@@ -6,15 +6,11 @@
       <change beforePath="$PROJECT_DIR$/out/production/lab4/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab4/main/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/lab4/main/task2/Buffer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab4/main/task2/Buffer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/lab4/main/task2/Consumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab4/main/task2/Consumer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab4/main/task2/Person.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab4/main/task2/Person.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/lab4/main/task2/Producer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab4/main/task2/Producer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab5/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab5/main/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/task2/Buffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/task2/Buffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/task2/Buffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/task2/NaiveBuffer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/task2/Consumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/task2/Consumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/task2/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/task2/Person.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/task2/Producer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/task2/Producer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab5/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab5/src/main/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,7 +94,7 @@
       <workItem from="1572689870365" duration="110000" />
       <workItem from="1572690053141" duration="21830000" />
       <workItem from="1573669083645" duration="23960000" />
-      <workItem from="1573808935496" duration="2246000" />
+      <workItem from="1573808935496" duration="12817000" />
     </task>
     <servers />
   </component>

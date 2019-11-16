@@ -19,7 +19,7 @@ public class Consumer extends Person implements Callable {
         while(!Thread.currentThread().isInterrupted()){
             int val = generator.nextInt(M) + 1;
             long tmp = buffer.get(val);
-            if(tmp != 0)
+            if(tmp != -1)
                 times.put(val, tmp);
 //                waitingTimeAverage = (waitingTimeAverage*i + tmp)/(i+1);
             else

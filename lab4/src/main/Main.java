@@ -5,13 +5,11 @@ package main;
 //import main.task1.Converter;
 //import main.task1.Producer;
 
-import main.task2.Buffer;
-import main.task2.Person;
-import main.task2.Producer;
-import main.task2.Consumer;
+import main.task2.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -48,15 +46,17 @@ public class Main {
 //            System.out.println("exception");
 //        }
 
-        app.taks_2();
+
+        app.task_2();
     }
 
-    void taks_2(){
-        final int M = 10000;
-        final int producersAmount = 100;
+    void task_2(){
+        final int M = 1000;
+        final int producersAmount = 10;
 //        final int consumersAmount = 10;
 
-        Buffer buffer = new Buffer(M);
+//        NaiveBuffer buffer = new NaiveBuffer(M);
+        FairBuffer buffer = new FairBuffer(M);
 
         ExecutorService service = Executors.newFixedThreadPool(2*producersAmount);
         List<Future<Person>> producersResult = new ArrayList<>();
@@ -70,26 +70,44 @@ public class Main {
 
         service.shutdown();
         try {
-            if (!service.awaitTermination(4, TimeUnit.SECONDS)) {
+            if (!service.awaitTermination(5, TimeUnit.SECONDS)) {
                 service.shutdownNow();
             }
 //            System.out.println(producersResult.get(0).get().retPersonType());
 
-            System.out.println("Producers:");
+//            System.out.println("Producers:");
+            FileWriter producersWriter = new FileWriter("producers_fair_10.txt");
             for(int i=0; i<producersAmount; i++){
                 Producer producer = (Producer) producersResult.get(i).get();
-                producer.getTimes().forEach((k, v) -> System.out.println(k + "    " + v));
+//                producer.getTimes().forEach((k, v) -> System.out.println(k + "    " + v));
+                producer.getTimes().forEach((k, v) -> {
+                    try {
+                        producersWriter.write(k + "    " + v + "\n");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
 //                System.out.println("***********************************");
             }
+            producersWriter.close();
 
-            System.out.println("\n###################################\n");
-            System.out.println("Consumers:");
+//            System.out.println("\n###################################\n");
+//            System.out.println("Consumers:");
+
+            FileWriter consumersWriter = new FileWriter("consumers_fair_10.txt");
             for(int i=0; i<producersAmount; i++){
                 Consumer consumer = (Consumer) consumersResult.get(i).get();
-                consumer.getTimes().forEach((k, v) -> System.out.println(k + "    " + v));
+//                consumer.getTimes().forEach((k, v) -> System.out.println(k + "    " + v));
+                consumer.getTimes().forEach((k, v) -> {
+                    try {
+                        consumersWriter.write(k + "    " + v + "\n");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
 //                System.out.println("***********************************");
             }
-        } catch (InterruptedException | ExecutionException e) {
+        } catch (InterruptedException | ExecutionException | IOException e) {
             service.shutdownNow();
         }
     }
