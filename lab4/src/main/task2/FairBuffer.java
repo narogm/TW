@@ -38,7 +38,6 @@ public class FairBuffer extends Buffer{
             producerEmpty = false;
             while(productSize + currentlyTaken > maxSize) {
 //                System.out.println("producer has to wait | val --> " + productSize);
-//                firstConsumerCondition.signal();
                 firstProducerCondition.await();
             }
             long waitingTime = System.nanoTime() - startTime;
@@ -66,7 +65,6 @@ public class FairBuffer extends Buffer{
             consumerEmpty = false;
             while(currentlyTaken < productSize) {
 //                System.out.println("consumer has to wait | val --> " + productSize);
-//                firstProducerCondition.signal();
                 firstConsumerCondition.await();
             }
             long waitingTime = System.nanoTime() - startTime;

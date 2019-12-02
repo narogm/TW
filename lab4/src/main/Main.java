@@ -53,7 +53,6 @@ public class Main {
     void task_2(){
         final int M = 1000;
         final int producersAmount = 10;
-//        final int consumersAmount = 10;
 
 //        NaiveBuffer buffer = new NaiveBuffer(M);
         FairBuffer buffer = new FairBuffer(M);
@@ -73,7 +72,6 @@ public class Main {
             if (!service.awaitTermination(5, TimeUnit.SECONDS)) {
                 service.shutdownNow();
             }
-//            System.out.println(producersResult.get(0).get().retPersonType());
 
 //            System.out.println("Producers:");
             FileWriter producersWriter = new FileWriter("producers_fair_10.txt");

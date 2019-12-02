@@ -3,14 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b97b0921-ff8d-4e33-82bf-f008053819aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab4/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab4/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab4/main/task2/Buffer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab4/main/task2/Buffer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab4/main/task2/Consumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab4/main/task2/Consumer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab4/main/task2/Producer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab4/main/task2/Producer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/task2/Buffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/task2/NaiveBuffer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/task2/Consumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/task2/Consumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/task2/Producer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/task2/Producer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/task2/FairBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/task2/FairBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab5/src/main/MyThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab5/src/main/MyThread.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +29,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../TO2/projekt/to-calendar" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -94,7 +89,12 @@
       <workItem from="1572689870365" duration="110000" />
       <workItem from="1572690053141" duration="21830000" />
       <workItem from="1573669083645" duration="23960000" />
-      <workItem from="1573808935496" duration="12817000" />
+      <workItem from="1573808935496" duration="12928000" />
+      <workItem from="1573900975874" duration="17000" />
+      <workItem from="1574636414636" duration="1782000" />
+      <workItem from="1574855872802" duration="1766000" />
+      <workItem from="1574973696079" duration="467000" />
+      <workItem from="1575236340098" duration="16000" />
     </task>
     <servers />
   </component>
