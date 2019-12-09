@@ -1,29 +1,38 @@
+var waterfall = require('async-waterfall')
+
 var Fork = function() {
     this.state = 0;
     return this;
 }
 
-Fork.prototype.acquire = function(timeToWait, cb) { 
+Fork.prototype.acquire = function(cb) { 
     // zaimplementuj funkcje acquire, tak by korzystala z algorytmu BEB
     // (http://pl.wikipedia.org/wiki/Binary_Exponential_Backoff), tzn:
     // 1. przed pierwsza proba podniesienia widelca Filozof odczekuje 1ms
     // 2. gdy proba jest nieudana, zwieksza czas oczekiwania dwukrotnie
     //    i ponawia probe itd.
-    if(this.state == 0){
-        this.state = 1;
-        // setTimeout(function(){
-            if (cb) cb();
-        // }, 0);
-        // return this;
+
+    var time = 1;
+    var getFork = function (timeToWait, fork){
+        setTimeout(function(){
+            if(fork.state == 0){
+                fork.state = 1;
+                if (cb) cb();
+            }
+            else{
+                // console.log('waiting for fork ' + timeToWait);
+                time = time * 2;
+                getFork(time, fork);
+            }
+        }, timeToWait);
     }
-    else{
-        console.log('waiting for fork ' + timeToWait);
-        setTimeout(this.acquire(timeToWait * 2, cb), timeToWait);
-    }
+
+    getFork(1, this);
 }
 
-Fork.prototype.release = function() { 
-    this.state = 0; 
+Fork.prototype.release = function(cb) { 
+    this.state = 0;
+    if (cb) cb(); 
 }
 
 var Philosopher = function(id, forks) {
@@ -45,50 +54,67 @@ Philosopher.prototype.startNaive = function(count) {
     // kazdy filozof powinien 'count' razy wykonywac cykl
     // podnoszenia widelcow -- jedzenia -- zwalniania widelcow
 
-    for(var i = 0; i<count; i++){
-        forks[f1].acquire(1, function(){
-            forks[f2].acquire(1, function(){
+    if(count != 0){
+        forks[f1].acquire(function(){
+            forks[f2].acquire(function(){
                 setTimeout(function(){
-                    console.log('Philosopher' + id + ' is eating');
-                },0);
-                forks[f1].release();
-                forks[f2].release();
+                    waterfall([
+                        function(cb){
+                            console.log('Philosopher ' + id + 'is eating');
+                            cb();
+                        },
+                        function(cb){
+                            forks[f1].release(cb);
+                        },
+                        function(cb){
+                            forks[f2].release(cb);
+                        },
+                        function(cb){
+                            philosophers[id].startNaive(count - 1);
+                        }
+                    ])
+                },32);
             });
         });
-    }
+    } 
 }
 
 Philosopher.prototype.startAsym = function(count) {
     var forks = this.forks,
-        f1 = (this.id % 2 == 1 ? this.f1 : this.f2),//this.f1,   //left
-        f2 = (this.id % 2 == 1 ? this.f2 : this.f1), //this.f2,   //right
+        f1 = (this.id % 2 == 1 ? this.f1 : this.f2),
+        f2 = (this.id % 2 == 1 ? this.f2 : this.f1),
         id = this.id;
     
     // zaimplementuj rozwiazanie asymetryczne
     // kazdy filozof powinien 'count' razy wykonywac cykl
     // podnoszenia widelcow -- jedzenia -- zwalniania widelcow
-    for(var i = 0; i<count; i++){
-        setTimeout(function(){
-            // if(id % 2 == 1){
-                forks[f1].acquire(1, function(){
-                    console.log(forks[f1].state);
-                    forks[f2].acquire(1, function(){
-                        setTimeout(function(){
-                            console.log('Philosopher ' + id + 'is eating');
-                        }, 10);
-                        forks[f1].release();
-                        forks[f2].release();
-                        console.log('Philosopher ' + id + 'finished cycle ' + i);
-                    });
-                });
-            // }
-            // else{
-            //     forks[f2].acquire(1, function(){
-            //         forks[f1].acquire(1);
-            //     });
-            // }
-        },0);
+
+    if(startTimes[id] == undefined) startTimes[id] = new Date().getTime();
+
+    if(count != 0){
+        forks[f1].acquire(function(){
+            forks[f2].acquire(function(){
+                setTimeout(function(){
+                    waterfall([
+                        // function(cb){
+                        //     console.log('Philosopher ' + id + 'is eating');
+                        //     cb();
+                        // },
+                        function(cb){
+                            forks[f1].release(cb);
+                        },
+                        function(cb){
+                            forks[f2].release(cb);
+                        },
+                        function(cb){
+                            philosophers[id].startAsym(count - 1);
+                        }
+                    ])
+                },32);
+            });
+        });
     }
+    else console.log(id, ',', new Date().getTime()-startTimes[id]);    
 }
 
 Philosopher.prototype.startConductor = function(count) {
@@ -100,12 +126,74 @@ Philosopher.prototype.startConductor = function(count) {
     // zaimplementuj rozwiazanie z kelnerem
     // kazdy filozof powinien 'count' razy wykonywac cykl
     // podnoszenia widelcow -- jedzenia -- zwalniania widelcow
+    if(startTimes[id] == undefined) startTimes[id] = new Date().getTime();
+
+    if(count != 0){
+        conductor.acquire(
+        function(){
+            forks[f1].acquire(function(){
+                forks[f2].acquire(function(){
+                    setTimeout(function(){
+                        waterfall([
+                            // function(cb){
+                            //     console.log('Philosopher ' + id + 'is eating');
+                            //     cb();
+                            // },
+                            function(cb){
+                                forks[f1].release(cb);
+                            },
+                            function(cb){
+                                forks[f2].release(cb);
+                            },
+                            function(cb){
+                                conductor.release(cb);
+                            },
+                            function(){
+                                philosophers[id].startConductor(count - 1);
+                            }
+                        ])
+                    },32);
+                });
+            });
+        });
+    }
+    else console.log(id, ',', new Date().getTime()-startTimes[id]);
 }
 
+var Conductor = function(){
+    this.freeSeats = 4;
+    return this;
+}
+
+Conductor.prototype.acquire = function(cb){
+    var time = 1;
+    var getSeat = function (timeToWait, conductor){
+        setTimeout(function(){
+            if(conductor.freeSeats > 0){
+                conductor.freeSeats--;
+                if (cb) cb();
+            }
+            else{
+                // console.log('waiting for seat ' + timeToWait);
+                time = time * 2;
+                getSeat(time, conductor);
+            }
+        }, timeToWait);
+    }
+
+    getSeat(1, conductor);
+}
+
+Conductor.prototype.release = function(cb){
+    conductor.freeSeats++;
+    if (cb) cb();
+}
 
 var N = 5;
 var forks = [];
-var philosophers = []
+var philosophers = [];
+var startTimes = [];
+var conductor = new Conductor();
 for (var i = 0; i < N; i++) {
     forks.push(new Fork());
 }
@@ -116,5 +204,6 @@ for (var i = 0; i < N; i++) {
 
 for (var i = 0; i < N; i++) {
     // philosophers[i].startNaive(10);
-    philosophers[i].startAsym(3);
+    // philosophers[i].startAsym(10);
+    philosophers[i].startConductor(10);
 }

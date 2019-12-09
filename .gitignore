@@ -1,2 +1,4 @@
 */*.xlsx
 */*.txt
+*/node_modules/
+*/*.json
